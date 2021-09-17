@@ -2,8 +2,11 @@ import jieba
 import gensim
 import re
 import os
+import sys
 
-
+path1 = sys.argv[1]
+path2 = sys.argv[2]
+path3 = sys.argv[3]
 # 获取文件的内容
 def file(path):
     string = ''
@@ -33,8 +36,6 @@ def sim(text1, text2):
     return cos
 
 def count():
-    path1 = input("论文原文的文件的绝对路径是：")
-    path2 = input("抄袭版论文的文件的绝对路径是：")
     str1 = file(path1)
     str2 = file(path2)
     text1 = part(str1)
@@ -53,8 +54,7 @@ def count():
 
 if __name__ == '__main__':
     result = count()
-    save_path = input("输入指定文件路径: ")
     print("文章相似度： %.4f" % result)
-    f = open(save_path, 'w', encoding="utf-8")
+    f = open(path3, 'w', encoding="utf-8")
     f.write("文章相似度： %.4f"%result)
     f.close()
