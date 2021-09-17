@@ -22,3 +22,12 @@ def filter(string):
     string = pattern.sub("", string)
     result = jieba.lcut(string)
     return result
+# 计算过滤后数据的余弦相似度
+def sim(text1, text2):
+    texts = [text1, text2]
+    dictionary = gensim.corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts]
+    similarity = gensim.similarities.Similarity('-Similarity-index', corpus, num_features=len(dictionary))
+    article = dictionary.doc2bow(text1)
+    cos = similarity[article][1]
+    return cos
